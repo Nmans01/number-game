@@ -1,0 +1,128 @@
+html,body {
+    margin: 0px;
+}
+body {
+    padding: 20%;
+}
+.stack {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.box,.circle {
+    width: 300px;
+    margin: 30px -100px -30px 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.box > * {
+    box-shadow: inset 1px 1px black,
+    inset -1px -1px black;
+    background-color: #fcbf49;
+}
+
+.circle > * {
+    border: dotted .5px black;
+}
+
+/*======================== Basic faces ========================*/
+.front-face {
+    height: 100px;
+    width: 100px;
+    transform: skewY(-20deg);
+
+    background-color: #eae2b7;
+
+}
+.front-face > h3 {
+    margin: auto;
+    margin-top: 40%;
+    text-align: center;
+}
+.side-face {
+    height: 100px;
+    width: 30px;
+    transform: skewY(20deg);
+
+    position: relative;
+    top: 12.5px;
+
+    /*background-color: blue;*/
+}
+.top-face {
+    box-shadow: inset .5px .5px black,
+    inset -.5px -.5px black;
+
+    width: 100px;
+    height: 11px;
+    transform: skew(70deg,-20deg);
+
+    position: relative;
+    right: 115px;
+    bottom: 11px;
+
+    /*background-color: rgb(0, 190, 0);*/
+}
+
+/*======================== Circle faces ========================*/
+.circle > .top-face {
+    box-shadow: inset .1px .1px black,
+    inset -.1px -.1px black;
+    border: none;
+}
+.circle > .front-face {
+    border: none;
+    border-radius: 50%;
+    box-shadow: inset 1px 1px black,
+    inset -1px -1px black;
+
+    background-color: #8dbd75;
+}
+.circle > .side-face {
+    width: 28px;
+}
+
+/*======================== Long box faces ========================*/
+.long-box > .front-face {
+    height: 100px;
+    width: 150px;
+    transform: skewY(-20deg);
+
+    background-color: #b7bcea;
+
+    position: relative;
+    bottom: 7px;
+}
+
+.long-box > * {
+    background-color: #747bbe;
+}
+
+.long-box > .front-face > h3 {
+    margin-top: 30%;
+}
+.long-box > .top-face {
+    box-shadow: inset .5px .5px black,
+    inset -.5px -.5px black;
+
+    width: 150px;
+    height: 11px;
+    transform: skew(70deg,-20deg);
+
+    position: relative;
+    right: 150px;
+    bottom: 18px;
+
+    /*background-color: rgb(0, 190, 0);*/
+}
+.long-box > .side-face {
+    width: 32px;
+}
+
+.test > .front-face{
+    box-shadow:
+        -20px -15px #fcbf49,
+        -13.33px -10px #fcbf49,
+        -6.66px -5px #fcbf49;
+}
