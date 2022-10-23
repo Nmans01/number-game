@@ -1,128 +1,126 @@
 html,body {
     margin: 0px;
+    font-family: 'Courier New', Courier, monospace;
 }
 body {
-    padding: 20%;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.stack {
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#actions {
+    padding:10px;
+    height: 200px;
+    width: 230px;
+}
+#score {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    padding:10px;
+    height: 200px;
+    width: 230px;
+}
+#queue {
+    padding: 50px;
+    padding-right: 150px;
+
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+#queue > * {
+    margin-right: 50px;
+}
+#queue > #second {
+    transform: scale(.7);
+}
+#stack {
+    min-height: 600px;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
 }
-.box,.circle {
-    width: 300px;
-    margin: 30px -100px -30px 0px;
+.shape {
     display: flex;
     flex-direction: row;
-}
 
-.box > * {
-    box-shadow: inset 1px 1px black,
-    inset -1px -1px black;
-    background-color: #fcbf49;
-}
-
-.circle > * {
-    border: dotted .5px black;
-}
-
-/*======================== Basic faces ========================*/
-.front-face {
+    box-shadow:
+        -20px -15px #fcbf49,
+        -13.33px -10px #fcbf49,
+        -6.66px -5px #fcbf49;
+        
     height: 100px;
     width: 100px;
     transform: skewY(-20deg);
 
     background-color: #eae2b7;
-
 }
-.front-face > h3 {
+
+.circle {
+    border: none;
+    border-radius: 50%;
+
+    background-color: #8dbd75;
+    box-shadow:
+        -20px -15px #607a53,
+        -13.33px -10px #607a53,
+        -6.66px -5px #607a53;
+}
+.triangle {
+    height: 0px;
+    width: 0px;
+
+    background-color: rgb(235, 235, 235);
+    box-shadow:
+        -20px -15px gray,
+        -13.33px -10px gray,
+        -6.66px -5px gray;
+
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid rgb(165, 165, 165);
+}
+
+.shape > h3 {
     margin: auto;
     margin-top: 40%;
     text-align: center;
 }
-.side-face {
-    height: 100px;
-    width: 30px;
-    transform: skewY(20deg);
-
+.triangle > h3 {
     position: relative;
-    top: 12.5px;
-
-    /*background-color: blue;*/
-}
-.top-face {
-    box-shadow: inset .5px .5px black,
-    inset -.5px -.5px black;
-
-    width: 100px;
-    height: 11px;
-    transform: skew(70deg,-20deg);
-
-    position: relative;
-    right: 115px;
-    bottom: 11px;
-
-    /*background-color: rgb(0, 190, 0);*/
+    right: .5em;
+    top: 50px;
 }
 
-/*======================== Circle faces ========================*/
-.circle > .top-face {
-    box-shadow: inset .1px .1px black,
-    inset -.1px -.1px black;
-    border: none;
-}
-.circle > .front-face {
-    border: none;
-    border-radius: 50%;
-    box-shadow: inset 1px 1px black,
-    inset -1px -1px black;
-
-    background-color: #8dbd75;
-}
-.circle > .side-face {
-    width: 28px;
-}
-
-/*======================== Long box faces ========================*/
-.long-box > .front-face {
+.rect {
     height: 100px;
     width: 150px;
-    transform: skewY(-20deg);
 
     background-color: #b7bcea;
+    box-shadow:
+        -20px -15px #747bbe,
+        -13.33px -10px #747bbe,
+        -6.66px -5px #747bbe;
 
     position: relative;
-    bottom: 7px;
+    left: 25px;
+    bottom: 9px;
 }
-
-.long-box > * {
-    background-color: #747bbe;
-}
-
-.long-box > .front-face > h3 {
+.rect > h3 {
     margin-top: 30%;
 }
-.long-box > .top-face {
-    box-shadow: inset .5px .5px black,
-    inset -.5px -.5px black;
-
-    width: 150px;
-    height: 11px;
-    transform: skew(70deg,-20deg);
-
-    position: relative;
-    right: 150px;
-    bottom: 18px;
-
-    /*background-color: rgb(0, 190, 0);*/
-}
-.long-box > .side-face {
-    width: 32px;
-}
-
-.test > .front-face{
+.connected {
+    background-color: #e662aa;
     box-shadow:
-        -20px -15px #fcbf49,
-        -13.33px -10px #fcbf49,
-        -6.66px -5px #fcbf49;
+        -20px -15px #a1517d,
+        -13.33px -10px #a1517d,
+        -6.66px -5px #a1517d;
 }
