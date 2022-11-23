@@ -3,25 +3,24 @@
 
     let queue;
     let stack;
-    let stupidThing;
     let shapes;
     let round;
     let connectIndicator;
     let connectWrapper;
+    let saved;
 
     window.addEventListener('load',init);
 
     function init () {
-        queue = document.getElementById('queue').children;
+        queue = document.getElementById('queue');
         stack = document.getElementById('stack');
-        stupidThing = document.getElementById('stack').cloneNode(true);
-        shapes = stupidThing.children;
+        shapes = document.getElementById('stack').cloneNode(true).children;
 
         round = 0;
 
         connectIndicator = document.getElementById('connectIndicator')
         connectIndicator.remove();
-        connectWrapper = {'shapes':[],'sum':0}; // "its just a list"
+        connectWrapper = {'shapes':[],'sum':0};
 
 
         stack.innerHTML = '';
@@ -32,7 +31,11 @@
     }
 
     function onKeydown (e) {
-        e.preventDefault();
+        if (e.key != 'F5' && e.key!='F12' && e.key!='Ctrl')
+            e.preventDefault();
+        
+        
+        save();
         // console.log(e.key);
         switch (e.key) {
             case 'ArrowUp':
@@ -47,8 +50,31 @@
                 drop();
                 break;
             case 'ArrowRight':
+                update(true);
+                break;
+            case 'Backspace':
+                console.log(save.stack);
+                load();
                 break;
         }
+    }
+    function save() {
+        saved = {
+            'stack' : stack.cloneNode(true),
+            'queue' : queue.cloneNode(true),
+            'connectWrapper' : Object.assign({}, connectWrapper)
+        };
+    }
+    function load() {
+        stack.parentNode.insertBefore(saved.stack,stack);
+        stack.remove();
+        stack = saved.stack;
+
+        queue.parentNode.insertBefore(saved.queue,queue);
+        queue.remove();
+        queue = saved.queue;
+
+        connectWrapper = saved.connectWrapper;
     }
     function onMousedown (e) {
         e.preventDefault();
@@ -91,6 +117,7 @@
                 window.removeEventListener('mouseover', connect);
                 console.log(minIndex+" "+maxIndex);
                 if (minIndex!=maxIndex) {
+                    save();
                     connectWrapper.shapes = stackArray.slice(minIndex,maxIndex+1);
                     connectWrapper.sum = sum;
                     update();
@@ -111,12 +138,10 @@
     }
 
     function drop() {
-        let shape=queue[0].children[0];
+        let shape=queue.children[0];
         // console.log(shape);
-        stack.appendChild(queue[0].removeChild(shape));
-        shape = shape=queue[1].children[0];
-        queue[0].appendChild(shape);
-        queue[1].appendChild(getNew());
+        stack.appendChild(queue.removeChild(shape));
+        queue.appendChild(getNew());
         update();
         round++;
         console.log("round: " + round);
@@ -142,7 +167,7 @@
         return (Math.pow(z,4)+Math.pow(z,3)+z)/3;
     }
 
-    function update () {
+    function update (sideways=false) {
         let weirdified = [];
         for (let i=0; i<stack.children.length; i++) {
             let a = stack.children[i];
@@ -152,6 +177,10 @@
             } else {
                 weirdified.push({'shapes':[a],'sum':parseInt(a.children[0].innerText)});
             }
+        }
+
+        if (sideways) {
+            weirdified.forEach(a => a.sum=parseInt(a.sum/10));
         }
 
         console.log(weirdified);
@@ -170,8 +199,10 @@
 
                 a.shapes[0].children[0].innerText = a.sum + b.sum;
                 b.shapes.forEach(shape => stack.removeChild(shape));
-                b.shapes = [];
-                b.sum = 0;
+
+                // reset the wrapper
+                connectWrapper.shapes = [];
+                connectWrapper.sum = 0;
                 update(); // check through the whole stack again
                 return;
             }

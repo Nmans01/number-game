@@ -14,7 +14,14 @@ header {
     flex-direction: row;
     justify-content: space-between;
 }
-#actions {
+
+#center-pane {
+    position: absolute;
+    margin: auto;
+    padding-bottom: 40px;
+}
+
+.header-pane {
     padding:10px;
     height: 200px;
     width: 230px;
@@ -23,10 +30,6 @@ header {
     display: flex;
     flex-direction: column;
     align-items: end;
-
-    padding:10px;
-    height: 200px;
-    width: 230px;
 }
 #queue {
     padding: 50px;
@@ -39,8 +42,8 @@ header {
 #queue > * {
     margin-right: 50px;
 }
-#queue > #second {
-    transform: scale(.7);
+#queue > *:nth-child(2) {
+    scale: .7;
 }
 #stack {
     min-height: 600px;
